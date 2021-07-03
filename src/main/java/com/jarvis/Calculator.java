@@ -4,33 +4,30 @@ public class Calculator {
 
 	public static void main(String[] args) {
 
-		 MathUtils operations = new MathUtils();
+		MathUtils op = new MathUtils();
 		GetInput getInput = new GetInput();
 
 		boolean running = false;
-
 		boolean firstloop = true;
 		boolean cal = true;
-		double finalval = 0;
 		running = true;
 		String sign;
 		double num;
 
 		while (running == true) {
+			
 			if (firstloop == true) {
 				String askfor_newcal = getInput.askfor_newcal();
 				if (askfor_newcal.equals("n")) {
-
 					break;
 				}
 				cal = true;
-				finalval = 0;
 			}
 
 			while (cal == true) {
 
 				if (firstloop == false) {
-					System.out.println("Value: " + finalval);
+					System.out.println("Value: " + op.finalval);
 				}
 
 				String user_input = getInput.getinput(firstloop);
@@ -52,30 +49,29 @@ public class Calculator {
 
 					switch (sign) {
 
-					case "+":
-
-						finalval += num;
-
-						break;
-					case "*":
-
-						finalval *= num;
-
-						break;
-
-					case "-":
-						finalval -= num;
-
-						break;
-
-					case "/":
-						finalval /= num;
-
-						break;
-
-					default:
-						finalval = num;
-						break;
+						case "+":
+							op.add(num);
+							break;
+							
+						case "*":
+							op.mul(num);
+							break;
+				
+						case "-":
+							op.sub(num);
+							break;
+	
+						case "/":
+							try {
+								op.div(num);
+							} catch (Exception e) {
+								System.out.println("Do not perform 0/0!!");
+							}
+							break;
+	
+						default:
+							op.def_val(num);
+							break;
 
 					}
 					firstloop = false;
@@ -86,5 +82,3 @@ public class Calculator {
 
 	}
 }
-
-
